@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UltiPlex - Wsparcie dla Twoich stawów</title>
+    <style>
+        :root {
+            --primary: #2b8b99;
+            --secondary: #e65c4f;
+            --light-bg: #f4f9fa;
+            --text-dark: #333;
+            --green-bg: #81c784;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #fff;
+        }
+        
+        /* Header & Hero */
+        header {
+            background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        h1, h2, h3 { color: var(--primary); }
+        .hero-title { font-size: 2.5em; margin-bottom: 10px; color: #1a5c66; }
+        .hero-subtitle { font-size: 1.2em; max-width: 600px; margin: 0 auto 30px; }
+        
+        .hero-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .product-image {
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Pricing & CTA */
+        .price-cta-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .price-box {
+            border: 2px dashed var(--secondary);
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            position: relative;
+            background: #fff9f9;
+        }
+        .discount-badge {
+            background-color: var(--secondary);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.9em;
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .old-price { text-decoration: line-through; color: #999; font-size: 1.2em; display: block; margin-bottom: 5px;}
+        .new-price { color: var(--secondary); font-size: 2.8em; font-weight: bold; line-height: 1;}
+        
+        .btn {
+            background-color: var(--secondary);
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 50px;
+            display: inline-block;
+            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(230, 92, 79, 0.4);
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .btn:hover { background-color: #c94b3f; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(230, 92, 79, 0.6);}
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        
+        /* Sections Grid */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        
+        /* Cards */
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+            margin-bottom: 15px;
+        }
+        .card h4 { margin-top: 0; color: var(--primary); font-size: 1.1em;}
+
+        /* New Ingredients Section */
+        .ingredients-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .ingredient-card {
+            display: flex;
+            align-items: center;
+            background-color: #f8fcfc;
+            border: 1px solid #b2dfdb;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .ingredient-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+        .ingredient-icon-wrapper {
+            font-size: 1.8em;
+            margin-right: 15px;
+            min-width: 50px;
+            text-align: center;
+            background: #e0f2f1;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ingredient-details h4 { margin: 0; color: #333; font-size: 1.1em; border: none; }
+
+        /* Final CTA */
+        .final-cta {
+            background-color: var(--light-bg);
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 40px;
+            border: 2px solid #e0f2f1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.8em;
+            margin-top: 40px;
+        }
+        footer a { color: #ccc; text-decoration: underline; }
+        .disclaimer { border: 1px solid #555; padding: 15px; margin-top: 20px; border-radius: 5px; color: #999;}
+
+        @media(max-width: 768px) {
+            .hero-content { flex-direction: column; text-align: center; padding: 20px;}
+            .grid-2, .ingredients-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container" style="padding-top: 10px; padding-bottom: 10px;">
+            <h1 class="hero-title">UltiPlex - Twój multikompleks dla stawów</h1>
+            <p class="hero-subtitle">Kompleksowe wsparcie i ochrona. Pomaga zmniejszyć dyskomfort i wspiera elastyczność dzięki potężnej formule.</p>
+            
+            <div class="hero-content">
+                <img src="UltiPlex_shadows.png" alt="UltiPlex Suplement" class="product-image">
+                
+                <div class="price-cta-box">
+                    <div class="price-box">
+                        <span class="discount-badge">-50% ZNIŻKI</span>
+                        <span class="old-price">194 PLN</span>
+                        <span class="new-price">97 PLN</span>
+                    </div>
+                    <a href="https://eh6f9.doctorovtech.com/l" class="btn">Dokończ zamówienie</a>
+                    <p style="font-size: 0.85em; color: #666; margin-top: 15px;">Bezpieczne przejście do kasy</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="container" style="background-color: #fff9f0; border-radius: 10px; margin-top: 40px;">
+        <h2 style="text-align: center; color: var(--secondary); margin-top: 0;">Objawy stawowe: rozpoznaj je, zanim będzie za późno</h2>
+        <p style="text-align: center; margin-bottom: 30px;">Problemy ze stawami często pojawiają się stopniowo. Czy zauważyłeś u siebie takie objawy?</p>
+        
+        <div class="grid-2">
+            <div>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li style="margin-bottom: 15px; font-size: 1.1em;">❌ <strong>Trzaski w stawach</strong> podczas ruchu.</li>
+                    <li style="margin-bottom: 15px; font-size: 1.1em;">❌ <strong>Obrzęk lub opuchnięcie</strong> kolana po intensywnych treningach.</li>
+                    <li style="margin-bottom: 15px; font-size: 1.1em;">❌ <strong>Lekki ból</strong> podczas wchodzenia po schodach lub po długim siedzeniu.</li>
+                    <li style="margin-bottom: 15px; font-size: 1.1em;">❌ <strong>Zwiększone zmęczenie</strong> stawów po wysiłku fizycznym.</li>
+                </ul>
+            </div>
+            <div style="background: white; padding: 25px; border-radius: 8px; border: 2px solid var(--primary);">
+                <h3 style="margin-top:0; color: var(--primary);">Cykl Regeneracji z UltiPlex:</h3>
+                <p style="line-height: 1.8;">Przyjmowanie UltiPlex ➔ Wsparcie łagodzenia stanu zapalnego ➔ Synteza kolagenu ➔ Elastyczność i ruchomość ➔ Wzmocnienie kości i mięśni ➔ <strong style="color: var(--secondary);">POWRÓT SWOBODY RUCHU</strong>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 style="text-align: center; margin-bottom: 30px;">Krok po kroku: działanie UltiPlex na Twoje stawy</h2>
+        <div class="grid-3">
+            <div class="card">
+                <h4>1. Uruchomienie regeneracji</h4>
+                <p>Witamina C i glicyna stymulują produkcję własnego kolagenu. Pomaga to utrzymać elastyczność tkanek.</p>
+            </div>
+            <div class="card">
+                <h4>2. Ochrona przed uszkodzeniami</h4>
+                <p>Witamina C pomaga w funkcjonowaniu chrząstki, a wapń wspiera utrzymanie zdrowych kości, zapobiegając ich łamliwości.</p>
+            </div>
+            <div class="card">
+                <h4>3. Zmniejszenie stanu zapalnego</h4>
+                <p>Ekstrakt z imbiru i hibiskus współdziałają, aby wspierać naturalną redukcję dyskomfortu i stymulować krążenie.</p>
+            </div>
+            <div class="card">
+                <h4>4. Przywrócenie elastyczności</h4>
+                <p>Witaminy z grupy B wspierają układ nerwowy, przyczyniając się do zmniejszenia napięcia mięśniowego.</p>
+            </div>
+            <div class="card">
+                <h4>5. Wzmocnienie odporności</h4>
+                <p>Selen i cynk pomagają w ochronie komórek przed stresem oksydacyjnym.</p>
+            </div>
+            <div class="card">
+                <h4>6. Szybkie działanie</h4>
+                <p>Aktywne składniki szybko się wchłaniają, wspierając organizm już od pierwszych dni stosowania.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="ingredients-title">Aktywne składniki: 12 w 1</h2>
+        
+        <div class="ingredients-grid">
+            <div class="ingredient-card">
+                <div class="ingredient-icon-wrapper">🪨</div>
+                <div class="ingredient-details">
+                    <h4>Cynk</h4>
+                </div>
+            </div>
+            <div class="ingredient-card">
+                <div class="ingredient-icon-wrapper">💊</div>
+                <div class="ingredient-details">
+                    <h4>Witamina E</h4>
+                </div>
+            </div>
+            <div class="ingredient-card">
+                <div class="ingredient-icon-wrapper">🍋</div>
+                <div class="ingredient-details">
+                    <h4>Witamina C</h4>
+                </div>
+            </div>
+            <div class="ingredient-card">
+                <div class="ingredient-icon-wrapper">🟢</div>
+                <div class="ingredient-details">
+                    <h4>Selen</h4>
+                </div>
+            </div>
+            <div class="ingredient-card">
+                <div class="ingredient-icon-wrapper">🫚</div>
+                <div class="ingredient-details">
+                    <h4>Ekstrakt z imbiru</h4>
+                </div>
+            </div>
+            <div class="ingredient-card">
+                <div class="ingredient-icon-wrapper">☀️</div>
+                <div class="ingredient-details">
+                    <h4>Witamina D3</h4>
+                </div>
+            </div>
+            <div class="ingredient-card">
+                <div class="ingredient-icon-wrapper">🥑</div>
+                <div class="ingredient-details">
+                    <h4>Witaminy z grupy B</h4>
+                </div>
+            </div>
+            <div class="ingredient-card">
+                <div class="ingredient-icon-wrapper">🦴</div>
+                <div class="ingredient-details">
+                    <h4>Wapń</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 style="text-align: center; margin-bottom: 30px;">Twoja przewaga z UltiPlex</h2>
+        <div class="card" style="border-left-color: #fbc02d;">
+            <h4>⭐ Wsparcie wielofunkcyjne</h4>
+            <p>Aktywne składniki działają synergicznie, wspierając cały układ ruchu.</p>
+        </div>
+        <div class="card" style="border-left-color: var(--secondary);">
+            <h4>🛡️ Profilaktyka degradacji</h4>
+            <p>Ochrona przed stresem oksydacyjnym – główną przyczyną przedwczesnego starzenia się chrząstki.</p>
+        </div>
+        <div class="card" style="border-left-color: #ab47bc;">
+            <h4>🦴 Wzmocnienie podstawy</h4>
+            <p>Solidne wsparcie dla kości (Wapń + Witamina D3) dla stabilnego oparcia stawów.</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="final-cta">
+            <h2 style="font-size: 2.2em; margin-top: 0;">Jesteś gotów na swobodę ruchu?</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">Zdobądź swój UltiPlex w promocyjnej cenie <strong>97 PLN</strong>. Przejdź do oficjalnej i bezpiecznej strony zamówienia.</p>
+            
+            <a href="https://eh6f9.doctorovtech.com/l" class="btn" style="max-width: 400px; margin: 0 auto;">DOKOŃCZ ZAMÓWIENIE (-50%)</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="padding: 0;">
+            <p>
+                <a href="#">Polityka prywatności</a> | 
+                <a href="#">Warunki korzystania</a> |
+                <a href="#">Kontakt</a>
+            </p>
+            <div class="disclaimer">
+                <strong>Zastrzeżenie (Disclaimer):</strong> Ten produkt jest suplementem diety, a nie lekiem. Nie jest przeznaczony do diagnozowania, leczenia ani zapobiegania jakimkolwiek chorobom. Informacje zawarte na tej stronie mają charakter wyłącznie informacyjny. Rezultaty mogą się różnić w zależności od indywidualnych cech organizmu. Oferta przeznaczona jest dla mieszkańców Polski.
+            </div>
+            <p style="margin-top: 20px;">&copy; 2026 UltiPlex. Wszelkie prawa zastrzeżone.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
